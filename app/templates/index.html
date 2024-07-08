@@ -3,20 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <title>Anime Style Filter</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 40px;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .images {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+        }
+        img {
+            max-width: 45%;
+            height: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        img:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        form {
+            margin-top: 30px;
+            text-align: center;
+        }
+        input[type="file"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            animation: bounceIn 0.5s ease;
+        }
+        button[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10px;
+            animation: bounceIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Upload an Image to Apply Anime Style Filter</h1>
-    <form action="/" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" required>
-        <button type="submit">Upload</button>
-    </form>
-    {% if original_img %}
-    <h2>Original Image</h2>
-    <img src="{{ url_for('send_uploaded_file', filename=original_img) }}" alt="Original Image">
-    {% endif %}
-    {% if filtered_img %}
-    <h2>Filtered Image</h2>
-    <img src="{{ url_for('send_result_file', filename=filtered_img) }}" alt="Filtered Image">
-    {% endif %}
+    <div class="container">
+        <h1>Upload an Image to Apply Anime Style Filter</h1>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <button type="submit">Upload</button>
+        </form>
+        {% if original_img and filtered_img %}
+        <div class="images">
+            <div>
+                <h2 style="color: #4CAF50;">Original Image</h2>
+                <img src="{{ url_for('send_uploaded_file', filename=original_img) }}" alt="Original Image" style="animation: fadeIn 0.5s ease;">
+            </div>
+            <div>
+                <h2 style="color: #4CAF50;">Filtered Image</h2>
+                <img src="{{ url_for('send_result_file', filename=filtered_img) }}" alt="Filtered Image" style="animation: fadeIn 0.5s ease;">
+            </div>
+        </div>
+        {% endif %}
+    </div>
 </body>
 </html>
