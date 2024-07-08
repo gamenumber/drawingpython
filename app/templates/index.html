@@ -1,25 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anime Style Filter</title>
 </head>
 <body>
-    <h1>Upload an Image</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept="image/*">
-        <input type="submit" value="Upload Image">
+    <h1>Upload an Image to Apply Anime Style Filter</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
     </form>
-
     {% if original_img %}
     <h2>Original Image</h2>
-    <img src="{{ original_img }}" alt="Original Image">
+    <img src="{{ url_for('send_uploaded_file', filename=original_img) }}" alt="Original Image">
     {% endif %}
-
     {% if filtered_img %}
     <h2>Filtered Image</h2>
-    <img src="{{ filtered_img }}" alt="Filtered Image">
+    <img src="{{ url_for('send_result_file', filename=filtered_img) }}" alt="Filtered Image">
     {% endif %}
 </body>
 </html>

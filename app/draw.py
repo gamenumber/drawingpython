@@ -1,6 +1,6 @@
 import webbrowser
 import threading
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, request, render_template, send_from_directory, url_for
 import cv2
 import numpy as np
 import os
@@ -90,7 +90,7 @@ def index():
             result_path = os.path.join(RESULT_FOLDER, 'anime_' + file.filename)
             cv2.imwrite(result_path, result)
             
-            return render_template('index.html', original_img=img_path, filtered_img=result_path)
+            return render_template('index.html', original_img=file.filename, filtered_img='anime_' + file.filename)
     return render_template('index.html')
 
 @app.route('/uploads/<filename>')
